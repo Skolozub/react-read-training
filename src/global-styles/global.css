@@ -1,0 +1,28 @@
+:root {
+  --main-bg-color: #fff7f4;
+  --dark-pink: #fb7e9e;
+  --pink: #ffb2c6;
+  --light-pink: #ffd2de;
+  --lighter-pink: #fff4f7;
+  --white: #fff;
+  --black: #000;
+  --error: red;
+}
+
+* {
+  box-sizing: border-box;
+  outline: none;
+}
+
+html,
+body {
+  min-height: 100vh;
+  font-family: "Montserrat", sans-serif;
+  line-height: 1.3;
+  font-size: 16px;
+  color: var(--black);
+}
+
+body {
+  background: var(--main-bg-color);
+}

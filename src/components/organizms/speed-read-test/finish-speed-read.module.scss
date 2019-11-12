@@ -1,0 +1,42 @@
+.wrapper{
+  display: flex;
+  flex-wrap: wrap;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.text{
+  width: 100%;
+  padding: 0 0.5rem;
+  font-size: 1.25rem;
+  text-align: center;
+}
+
+.speedText{
+  margin-top: 40px;
+  margin-bottom: 1rem;
+}
+
+.timeText{
+  margin-bottom: 40px;
+}
+
+.bold{
+  font-weight: 600;
+}
+
+.panel{
+  display: flex;
+  align-items: center;
+}
+
+@media (max-width: 470px) {
+  .panel{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+  }
+}
