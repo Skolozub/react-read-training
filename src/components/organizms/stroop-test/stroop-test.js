@@ -10,7 +10,6 @@ import styles from "./stroop-test.module.scss";
 
 const StroopTest = () => {
   const [randColors, setRandColors] = useState([]);
-  const [rightCombination, setRightCombination] = useState([]);
   const [answersCombinations, setAnswersCombinations] = useState([]);
 
   useEffect(() => {
@@ -22,8 +21,6 @@ const StroopTest = () => {
       },
       [[], colors]
     )[0];
-    setRightCombination(randColorsArray);
-    console.log("randColorsArray", randColorsArray);
 
     const shakedColors = randColorsArray.reduce(
       (acc, [_, hex]) => {
@@ -35,7 +32,6 @@ const StroopTest = () => {
       [[], randColorsArray]
     )[0];
     setRandColors(shakedColors);
-    console.log("shakedColors", shakedColors);
 
     const answerVariants = [...Array(3)].map((_, i) => {
       const maxElement = randColorsArray.length;
@@ -52,31 +48,41 @@ const StroopTest = () => {
       );
       return Object.values(shakedNamesAnswers);
     });
-    console.log("answerVariants", answerVariants);
 
-    const f = (arr, result = []) => {
-      if (arr.length === 0) return arr;
-
-      const randPos = random.int(0, arr.length - 1);
-      if (result[randPos]) f(arr, result);
+    const shakeAnwersArray = (arr, maxElt, result = {}) => {
+      if (arr.length === 0) return result;
+      const randPos = random.int(0, maxElt);
+      if (result[randPos]) return shakeAnwersArray(arr, maxElt, result);
 
       const { 0: newElt, ...rest } = arr;
-      console.log("rest", rest);
 
-      f(Object.values(rest, { ...result, [randPos]: newElt }));
+      return shakeAnwersArray(Object.values(rest), maxElt, {
+        ...result,
+        [randPos]: newElt
+      });
     };
 
-    setAnswersCombinations();
+    const shakedAnswersCombinations = shakeAnwersArray(
+      [
+        ...answerVariants.map(elt => [elt, false]),
+        [randColorsArray.map(([name]) => name), true]
+      ],
+      3
+    );
+
+    setAnswersCombinations(Object.values(shakedAnswersCombinations));
   }, []);
 
   return (
     <StepsTemplate>
       <StoreContext.Consumer>
-        {({ speedreadTest, actions }) => {
+        {({ stroopTest, actions }) => {
           const { changeComponentIndex } = actions;
-          const onClickStart = () => changeComponentIndex(index => index + 1);
-
-          const { changeSpeedreadText, changeSpeedreadTime } = speedreadTest;
+          const { setStroopAnswer, changeStroopTime } = stroopTest;
+          const onClickStart = status => {
+            setStroopAnswer(status);
+            changeComponentIndex(index => index + 1);
+          };
 
           return (
             <>
@@ -86,7 +92,7 @@ const StroopTest = () => {
               <div className={styles.time}>
                 Время:{" "}
                 <span className={styles.bold}>
-                  <Timer getTime={changeSpeedreadTime} isStart />
+                  <Timer getTime={changeStroopTime} isStart />
                 </span>
               </div>
               <div className={styles.wrapper}>
@@ -101,9 +107,15 @@ const StroopTest = () => {
                     </div>
                   ))}
                 </div>
-                <Button onClick={onClickStart}>
-                  {rightCombination.map(([name]) => name).join("-")}
-                </Button>
+                <div className={styles.buttons}>
+                  {answersCombinations.map(([names, status], i) => (
+                    <div key={i} className={styles.button}>
+                      <Button onClick={() => onClickStart(status)}>
+                        {names.join("-")}
+                      </Button>
+                    </div>
+                  ))}
+                </div>
               </div>
             </>
           );

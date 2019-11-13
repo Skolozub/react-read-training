@@ -8,17 +8,19 @@ import styles from "./finish-stroop.module.scss";
 const FinishStroop = () => (
   <StepsTemplate>
     <StoreContext.Consumer>
-      {({ isRetryEnable, actions }) => {
+      {({ isRetryEnable, stroopTest, actions }) => {
         const { changeComponentIndex } = actions;
         const onClickRetryStep = () => changeComponentIndex(index => index - 1);
         const onClickNextStep = () => changeComponentIndex(index => index + 1);
+
+        const { stroopTime } = stroopTest;
 
         return (
           <div className={styles.wrapper}>
             <Clock />
             <div className={styles.text}>
               Отлично! Ты справился за{" "}
-              <span className={styles.bold}>00:08</span>
+              <span className={styles.bold}>{stroopTime}</span>
             </div>
             <div className={styles.panel}>
               {isRetryEnable && (

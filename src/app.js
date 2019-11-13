@@ -46,6 +46,8 @@ const App = () => {
   const [speedreadTime, changeSpeedreadTime] = useState("00:00");
   const [speedreadText, changeSpeedreadText] = useState("");
   const [speedreadAnswers, changeSpeedreadAnswers] = useState({});
+  const [stroopTime, changeStroopTime] = useState("00:00");
+  const [stroopAnswer, setStroopAnswer] = useState({});
 
   const Component = Components[componentIndex];
 
@@ -67,6 +69,7 @@ const App = () => {
       speedreadAnswers,
       changeSpeedreadAnswers
     },
+    stroopTest: { stroopTime, changeStroopTime, stroopAnswer, setStroopAnswer },
     actions: {
       changeComponentIndex
     },
