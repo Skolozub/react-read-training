@@ -23,11 +23,7 @@ class Schulte extends React.Component {
       withDot,
       answer,
       matrix,
-      solution,
-      finishTime: [],
-      isStartTimer: false,
-      isStarttraining: false,
-      isFinishtrainig: false
+      solution
     };
     const { length: symbolsLength } = symbols;
     const symbolsNeeds = withDot ? rows * cols - 1 : rows * cols;
@@ -140,80 +136,55 @@ class Schulte extends React.Component {
 
   componentDidUpdate = () => {
     if (this.isTrainingFinish()) {
-      this.startTraining();
-      this.setState({ isStartTimer: false });
-      this.setState({ isStarttraining: false, isFinishtrainig: true });
+      this.props.changeComponentIndex(index => index + 1);
     }
   };
 
-  start = () => {
-    this.setState({ isStarttraining: true, isStartTimer: true });
-  };
-
   render = () => {
-    const {
-      matrix,
-      solution,
-      answer,
-      finishTime,
-      isStartTimer,
-      isStarttraining,
-      isFinishtrainig
-    } = this.state;
-
+    const { matrix, solution, answer } = this.state;
+    const nextLetter = solution[answer.length] || "";
     return (
       <div>
-        {!isStarttraining && !isFinishtrainig && (
-          <div>
-            <p>
-              Стараясь смотреть на точку в центре, максимально быстро найдите
-              буквы от А до Д, кликая последовательно: А, Б, В, Г, Д
-            </p>
-            <button className={styles.button} onClick={this.start}>
-              Начать
-            </button>
-          </div>
-        )}
+        <div className={styles.wrapper}>
+          <div className={styles.info}>
+            <div className={styles.time}>
+              Время:{" "}
+              <span className={styles.bold}>
+                <Timer getTime={this.props.changeSchulteTime} isStart />
+              </span>
+            </div>
 
-        {isFinishtrainig && (
-          <div className={styles.alert}>
-            <div>{`Молодец! Ты справился за ${
-              finishTime[finishTime.length - 1]
-            }!!!`}</div>
-          </div>
-        )}
-
-        {isStarttraining && (
-          <div className={styles.wrapper}>
-            <Timer isStart={isStartTimer} getTime={this.setFinishTime} />
             <div className={styles.hint}>
-              Найдите: {solution[answer.length]}
-            </div>
-            <div className={styles.table}>
-              {matrix.map((row, i) => (
-                <div key={i} className={styles.row}>
-                  {row.map((symbol, j) => (
-                    <>
-                      {symbol !== "dot" ? (
-                        <div
-                          key={j}
-                          className={styles.symbol}
-                          onClick={() => this.onClickHandler(symbol)}
-                        >
-                          {symbol}
-                        </div>
-                      ) : (
-                        <div className={`${styles.symbol} ${styles.dotSymbol}`}>
-                          &middot;
-                        </div>
-                      )}
-                    </>
-                  ))}
-                </div>
-              ))}
+              Найдите букву:{" "}
+              <span className={styles.bold}>{nextLetter.toUpperCase()}</span>
             </div>
           </div>
-        )}
+
+          <div className={styles.table}>
+            {matrix.map((row, i) => (
+              <div key={i} className={styles.row}>
+                {row.map((symbol, j) => (
+                  <>
+                    {symbol !== "dot" ? (
+                      <div
+                        key={j}
+                        className={styles.symbol}
+                        onClick={() => this.onClickHandler(symbol)}
+                      >
+                        {symbol.toUpperCase()}
+                      </div>
+                    ) : (
+                      <div
+                        key={j}
+                        className={`${styles.symbol} ${styles.dotSymbol}`}
+                      />
+                    )}
+                  </>
+                ))}
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     );
   };

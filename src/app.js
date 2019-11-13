@@ -1,27 +1,38 @@
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
-import "./global-styles/reset.css";
-import "./global-styles/global.css";
 import StartStep from "./components/organizms/start-step";
 import {
   StartSchulte,
-  FinishSchulte
+  FinishSchulte,
+  SchulteTest
 } from "./components/organizms/schulte-test";
 import {
   StartSpeedRead,
-  FinishSpeedRead
+  SpeedReadTest,
+  FinishSpeedRead,
+  SpeedReadQuestions
 } from "./components/organizms/speed-read-test";
-import { StartStroop, FinishStroop } from "./components/organizms/stroop-test";
+import {
+  StartStroop,
+  FinishStroop,
+  StroopTest
+} from "./components/organizms/stroop-test";
+import "./global-styles/reset.css";
+import "./global-styles/global.css";
 
 export const StoreContext = React.createContext();
 const Components = [
   StartStroop,
+  StroopTest,
   FinishStroop,
-  StartSpeedRead,
-  FinishSpeedRead,
   StartStep,
   StartSchulte,
-  FinishSchulte
+  SchulteTest,
+  FinishSchulte,
+  StartSpeedRead,
+  SpeedReadTest,
+  SpeedReadQuestions,
+  FinishSpeedRead
 ];
 
 const App = () => {
@@ -30,6 +41,12 @@ const App = () => {
     age: "default",
     error: false
   });
+  const [schulteTime, changeSchulteTime] = useState("00:00");
+
+  const [speedreadTime, changeSpeedreadTime] = useState("00:00");
+  const [speedreadText, changeSpeedreadText] = useState("");
+  const [speedreadAnswers, changeSpeedreadAnswers] = useState({});
+
   const Component = Components[componentIndex];
 
   const store = {
@@ -37,6 +54,18 @@ const App = () => {
       age,
       error,
       changeAgeState
+    },
+    schulteTest: {
+      schulteTime,
+      changeSchulteTime
+    },
+    speedreadTest: {
+      speedreadText,
+      changeSpeedreadText,
+      speedreadTime,
+      changeSpeedreadTime,
+      speedreadAnswers,
+      changeSpeedreadAnswers
     },
     actions: {
       changeComponentIndex

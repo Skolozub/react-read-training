@@ -1,4 +1,5 @@
-import StartStroop from ".//start-stroop";
+import StartStroop from "./start-stroop";
+import StroopTest from "./stroop-test";
 import FinishStroop from "./finish-stroop";
 
-export { StartStroop, FinishStroop };
+export { StartStroop, StroopTest, FinishStroop };

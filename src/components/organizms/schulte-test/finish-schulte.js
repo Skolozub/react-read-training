@@ -8,17 +8,18 @@ import styles from "./finish-schulte.module.scss";
 const FinishSchulte = () => (
   <StepsTemplate>
     <StoreContext.Consumer>
-      {({ isRetryEnable, actions }) => {
+      {({ isRetryEnable, schulteTest, actions }) => {
         const { changeComponentIndex } = actions;
         const onClickRetryStep = () => changeComponentIndex(index => index - 1);
         const onClickNextStep = () => changeComponentIndex(index => index + 1);
 
+        const { schulteTime } = schulteTest;
         return (
           <div className={styles.wrapper}>
             <Clock />
             <div className={styles.text}>
               Отлично! Ты справился за{" "}
-              <span className={styles.bold}>00:08</span>
+              <span className={styles.bold}>{schulteTime}</span>
             </div>
             <div className={styles.panel}>
               {isRetryEnable && (

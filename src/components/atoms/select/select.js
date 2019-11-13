@@ -14,7 +14,7 @@ export const SelectView = ({
   isOpened = false,
   toggleHandler,
   closeHandler,
-  optionsHeight = 220,
+  optionsHeight = 180,
   referer
 }) => {
   const isValue = ({ value }) => String(input.value) === String(value);

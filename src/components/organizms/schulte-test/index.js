@@ -1,4 +1,5 @@
 import StartSchulte from "./start-shulte";
+import SchulteTest from "./schulte-test";
 import FinishSchulte from "./finish-schulte";
 
-export { StartSchulte, FinishSchulte };
+export { StartSchulte, SchulteTest, FinishSchulte };

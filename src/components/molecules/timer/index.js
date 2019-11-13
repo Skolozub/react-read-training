@@ -14,8 +14,6 @@ class Timer extends React.Component {
   componentDidUpdate = prevProps => {
     const { isStart } = this.props;
     if (prevProps.isStart !== isStart) {
-      console.log("isStart", isStart);
-
       if (isStart) return this.startTimer();
       this.stopTimer();
     }
@@ -26,13 +24,11 @@ class Timer extends React.Component {
   };
 
   getUserFriendlyTime = ms => {
-    if (!ms) return "00:00:00";
-    const mseconds = ms % 1000;
+    if (!ms) return "00:00";
+
     const seconds = Math.floor(ms / 1000) % 60;
     const minutes = Math.floor(ms / (1000 * 60));
-    return `${`0${minutes}`.slice(-2)}:${`0${seconds}`.slice(
-      -2
-    )}:${`00${mseconds}`.slice(-3)}`;
+    return `${`0${minutes}`.slice(-2)}:${`0${seconds}`.slice(-2)}`;
   };
 
   startTimer = () => {

@@ -9,8 +9,8 @@ const Clock = () => (
     xmlns="http://www.w3.org/2000/svg"
   >
     <path
-      fill-rule="evenodd"
-      clip-rule="evenodd"
+      fillRule="evenodd"
+      clipRule="evenodd"
       d="M40 76C59.8823 76 76 59.8823 76 40C76 20.1177 59.8823 4 40 4C20.1177 4 4 20.1177 4 40C4 59.8823 20.1177 76 40 76ZM40 80C62.0914 80 80 62.0914 80 40C80 17.9086 62.0914 0 40 0C17.9086 0 0 17.9086 0 40C0 62.0914 17.9086 80 40 80Z"
       fill="#CF0EFF"
     />

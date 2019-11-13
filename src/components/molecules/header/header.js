@@ -12,7 +12,7 @@ const Header = () => (
         </a>
         <a
           className={styles.link}
-          href="http://google.com"
+          href="/"
           rel="noopener noreferrer"
           target="_blank"
         >

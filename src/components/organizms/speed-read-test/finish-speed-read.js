@@ -9,19 +9,33 @@ import styles from "./finish-speed-read.module.scss";
 const FinishSpeedRead = () => (
   <StepsTemplate>
     <StoreContext.Consumer>
-      {({ isRetryEnable, actions }) => {
+      {({ isRetryEnable, speedreadTest, actions }) => {
         const { changeComponentIndex } = actions;
-        const onClickRetryStep = () => changeComponentIndex(index => index - 1);
+        const onClickRetryStep = () => changeComponentIndex(index => index - 2);
         const onClickNextStep = () => changeComponentIndex(index => index + 1);
+
+        const { speedreadTime, speedreadText } = speedreadTest;
+        const wordsNumber = (
+          speedreadText.description.match(/([а-яА-ЯёЁ]+)/g) || []
+        ).length;
+        console.log("wordsNumber", wordsNumber);
+
+        const [minutes, seconds] = speedreadTime.split(":").map(Number);
+
+        const commonTime = 60 * minutes + seconds || 1;
+        const wordsInSecond = Math.floor(wordsNumber / commonTime);
+        const wordsInMinute = wordsInSecond * 60;
 
         return (
           <div className={styles.wrapper}>
             <Car />
             <div className={cn(styles.text, styles.speedText)}>
-              Скорость чтения: <span className={styles.bold}>200 слов/мин</span>
+              Скорость чтения:{" "}
+              <span className={styles.bold}>{wordsInMinute} слов/мин</span>
             </div>
             <div className={cn(styles.text, styles.timeText)}>
-              Ты прочитал текст за <span className={styles.bold}>00:59</span>
+              Ты прочитал текст за{" "}
+              <span className={styles.bold}>{speedreadTime}</span>
             </div>
             <div className={styles.panel}>
               {isRetryEnable && (
