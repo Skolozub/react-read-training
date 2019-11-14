@@ -1,0 +1,29 @@
+.wrapper{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.step{
+  padding: 4px 0;
+  display: flex;
+}
+
+.stepName{
+  background: var(--white);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #646464;
+  font-size: 0.875rem;
+}
+
+.active{
+  div{
+    background: var(--pink);
+    color: var(--black);
+  }
+  
+  svg > path{
+    fill: var(--pink);
+  }
+}

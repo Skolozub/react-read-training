@@ -1,7 +1,8 @@
 import React from "react";
 import random from "random";
-import styles from "./shulte.module.scss";
+import cn from "classnames";
 import Timer from "../timer";
+import styles from "./shulte.module.scss";
 
 class Schulte extends React.Component {
   constructor(props) {
@@ -23,7 +24,11 @@ class Schulte extends React.Component {
       withDot,
       answer,
       matrix,
-      solution
+      solution,
+      error: {
+        sym: "",
+        timer: 0
+      }
     };
     const { length: symbolsLength } = symbols;
     const symbolsNeeds = withDot ? rows * cols - 1 : rows * cols;
@@ -118,12 +123,19 @@ class Schulte extends React.Component {
     return answer.length === solution.length;
   };
 
-  onClickHandler = symbol => {
+  onClickHandler = (symbol, key) => {
     const { answer, solution } = this.state;
     const { length: answerLength } = answer;
+    clearTimeout(this.state.error.timer);
     if (solution[answerLength] === symbol) {
       this.setState(({ answer }) => ({ answer: [...answer, symbol] }));
     }
+
+    this.setState(({ error }) => ({ error: { ...error, sym: key } }));
+    const timer = setTimeout(() => {
+      this.setState(({ error }) => ({ error: { ...error, sym: "" } }));
+    }, 1000);
+    this.setState(({ error }) => ({ error: { ...error, timer } }));
   };
 
   setFinishTime = time => {
@@ -141,7 +153,7 @@ class Schulte extends React.Component {
   };
 
   render = () => {
-    const { matrix, solution, answer } = this.state;
+    const { matrix, solution, answer, error } = this.state;
     const nextLetter = solution[answer.length] || "";
     return (
       <div>
@@ -167,8 +179,10 @@ class Schulte extends React.Component {
                   symbol !== "dot" ? (
                     <div
                       key={`${i}${j}`}
-                      className={styles.symbol}
-                      onClick={() => this.onClickHandler(symbol)}
+                      className={cn(styles.symbol, {
+                        [styles.error]: `${i}${j}` === error.sym
+                      })}
+                      onClick={() => this.onClickHandler(symbol, `${i}${j}`)}
                     >
                       {symbol.toUpperCase()}
                     </div>

@@ -81,6 +81,7 @@ const App = () => {
     actions: {
       changeComponentIndex
     },
+    componentIndex,
     isRetryEnable: true
   };
 
