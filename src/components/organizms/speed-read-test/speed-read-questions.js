@@ -26,12 +26,13 @@ const SpeedReadQuestions = () => {
             serError(true);
           };
 
-          console.log(speedreadText);
-
           const onChangeHandler = e => {
-            const { name, value } = e.currentTarget;
+            const { name, value } = e.target;
 
-            changeSpeedreadAnswers(answers => ({ ...answers, [name]: value }));
+            changeSpeedreadAnswers(answers => ({
+              ...answers,
+              [name]: Number(value)
+            }));
           };
 
           return (

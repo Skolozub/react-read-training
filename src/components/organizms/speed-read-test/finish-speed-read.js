@@ -14,7 +14,11 @@ const FinishSpeedRead = () => (
         const onClickRetryStep = () => changeComponentIndex(index => index - 2);
         const onClickNextStep = () => changeComponentIndex(index => index + 1);
 
-        const { speedreadTime, speedreadText } = speedreadTest;
+        const {
+          speedreadTime,
+          speedreadText,
+          setSpeedreadWordsInMinute
+        } = speedreadTest;
         const wordsNumber = (
           speedreadText.description.match(/([а-яА-ЯёЁ]+)/g) || []
         ).length;
@@ -25,6 +29,7 @@ const FinishSpeedRead = () => (
         const commonTime = 60 * minutes + seconds || 1;
         const wordsInSecond = Math.floor(wordsNumber / commonTime);
         const wordsInMinute = wordsInSecond * 60;
+        setSpeedreadWordsInMinute(wordsInMinute);
 
         return (
           <div className={styles.wrapper}>

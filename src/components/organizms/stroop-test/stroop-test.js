@@ -110,7 +110,7 @@ const StroopTest = () => {
                 <div className={styles.buttons}>
                   {answersCombinations.map(([names, status], i) => (
                     <div key={i} className={styles.button}>
-                      <Button onClick={() => onClickStart(status)}>
+                      <Button onClick={() => onClickStart(status)} color="pink">
                         {names.join("-")}
                       </Button>
                     </div>

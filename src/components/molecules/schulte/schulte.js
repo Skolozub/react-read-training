@@ -163,24 +163,22 @@ class Schulte extends React.Component {
           <div className={styles.table}>
             {matrix.map((row, i) => (
               <div key={i} className={styles.row}>
-                {row.map((symbol, j) => (
-                  <>
-                    {symbol !== "dot" ? (
-                      <div
-                        key={j}
-                        className={styles.symbol}
-                        onClick={() => this.onClickHandler(symbol)}
-                      >
-                        {symbol.toUpperCase()}
-                      </div>
-                    ) : (
-                      <div
-                        key={j}
-                        className={`${styles.symbol} ${styles.dotSymbol}`}
-                      />
-                    )}
-                  </>
-                ))}
+                {row.map((symbol, j) =>
+                  symbol !== "dot" ? (
+                    <div
+                      key={`${i}${j}`}
+                      className={styles.symbol}
+                      onClick={() => this.onClickHandler(symbol)}
+                    >
+                      {symbol.toUpperCase()}
+                    </div>
+                  ) : (
+                    <div
+                      key={`${i}${j}`}
+                      className={`${styles.symbol} ${styles.dotSymbol}`}
+                    />
+                  )
+                )}
               </div>
             ))}
           </div>

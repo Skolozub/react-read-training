@@ -17,14 +17,12 @@ import {
   FinishStroop,
   StroopTest
 } from "./components/organizms/stroop-test";
+import FinishStep from "./components/organizms/finish-step/finish-step";
 import "./global-styles/reset.css";
 import "./global-styles/global.css";
 
 export const StoreContext = React.createContext();
 const Components = [
-  StartStroop,
-  StroopTest,
-  FinishStroop,
   StartStep,
   StartSchulte,
   SchulteTest,
@@ -32,7 +30,11 @@ const Components = [
   StartSpeedRead,
   SpeedReadTest,
   SpeedReadQuestions,
-  FinishSpeedRead
+  FinishSpeedRead,
+  StartStroop,
+  StroopTest,
+  FinishStroop,
+  FinishStep
 ];
 
 const App = () => {
@@ -41,11 +43,15 @@ const App = () => {
     age: "default",
     error: false
   });
+
   const [schulteTime, changeSchulteTime] = useState("00:00");
 
   const [speedreadTime, changeSpeedreadTime] = useState("00:00");
   const [speedreadText, changeSpeedreadText] = useState("");
   const [speedreadAnswers, changeSpeedreadAnswers] = useState({});
+  const [speedreadWordsInMinute, setSpeedreadWordsInMinute] = useState(0);
+  console.log("speedreadAnswers", speedreadAnswers);
+
   const [stroopTime, changeStroopTime] = useState("00:00");
   const [stroopAnswer, setStroopAnswer] = useState({});
 
@@ -66,6 +72,8 @@ const App = () => {
       changeSpeedreadText,
       speedreadTime,
       changeSpeedreadTime,
+      speedreadWordsInMinute,
+      setSpeedreadWordsInMinute,
       speedreadAnswers,
       changeSpeedreadAnswers
     },

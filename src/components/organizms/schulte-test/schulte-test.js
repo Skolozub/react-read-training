@@ -1,7 +1,5 @@
-import React, { useEffect, useState } from "react";
-import random from "random";
+import React from "react";
 import StepsTemplate from "../../templates/steps-template";
-import Button from "../../atoms/button";
 import { StoreContext } from "../../../app";
 import TestDescription from "../../atoms/test-description";
 import styles from "./shulte-test.module.scss";

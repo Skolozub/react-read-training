@@ -22,7 +22,7 @@ const ages = [
 const StartStep = () => (
   <MainTemplate>
     <StoreContext.Consumer>
-      {({ startStep, actions }) => {
+      {({ startStep, actions, speedreadTest }) => {
         const { age, error, changeAgeState } = startStep;
         const onChangeAge = e => {
           changeAgeState({
@@ -30,11 +30,17 @@ const StartStep = () => (
             error: false
           });
         };
-
+        const { changeSpeedreadAnswers } = speedreadTest;
         const { changeComponentIndex } = actions;
+
         const onClickStart = () => {
+          if (age !== "default") {
+            changeComponentIndex(index => index + 1);
+            changeSpeedreadAnswers({});
+            return null;
+          }
+
           changeAgeState(state => ({ ...state, error: true }));
-          if (age !== "default") changeComponentIndex(index => index + 1);
         };
 
         return (

@@ -28,7 +28,7 @@ const FinishStroop = () => (
                   Еще подход
                 </Button>
               )}
-              <Button onClick={onClickNextStep}>Следующий тест</Button>
+              <Button onClick={onClickNextStep}>Результаты</Button>
             </div>
           </div>
         );
