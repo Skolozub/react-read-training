@@ -50,7 +50,6 @@ const App = () => {
   const [speedreadText, changeSpeedreadText] = useState("");
   const [speedreadAnswers, changeSpeedreadAnswers] = useState({});
   const [speedreadWordsInMinute, setSpeedreadWordsInMinute] = useState(0);
-  console.log("speedreadAnswers", speedreadAnswers);
 
   const [stroopTime, changeStroopTime] = useState("00:00");
   const [stroopAnswer, setStroopAnswer] = useState({});

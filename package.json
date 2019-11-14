@@ -4,10 +4,11 @@
   "description": "",
   "keywords": [],
   "homepage": ".",
-  "main": "src/app.js",
+  "main": "index.js",
   "dependencies": {
     "classnames": "2.2.6",
     "history": "4.10.1",
+    "node-sass": "^4.13.0",
     "query-string": "6.8.3",
     "random": "2.1.1",
     "react": "16.8.6",
@@ -26,5 +27,10 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
-  "browserslist": [">0.2%", "not dead", "not ie <= 11", "not op_mini all"]
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }

@@ -2,7 +2,7 @@ import React from "react";
 import MainTemplate from "../../templates/main-template";
 import Select from "../../atoms/select/select";
 import Button from "../../atoms/button";
-import { StoreContext } from "../../../app";
+import { StoreContext } from "../../../index";
 import styles from "./start-step.module.scss";
 
 const ages = [

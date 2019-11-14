@@ -4,7 +4,7 @@ import styles from "./steps-bar.module.scss";
 import First from "./first.svg";
 import Right from "./right.svg";
 import Left from "./left.svg";
-import { StoreContext } from "../../../app";
+import { StoreContext } from "../../../index";
 
 const StepsBar = ({ steps, activeNum }) => (
   <StoreContext.Consumer>

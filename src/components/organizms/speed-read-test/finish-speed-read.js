@@ -2,7 +2,7 @@ import React from "react";
 import cn from "classnames";
 import StepsTemplate from "../../templates/steps-template";
 import Button from "../../atoms/button";
-import { StoreContext } from "../../../app";
+import { StoreContext } from "../../../index";
 import Car from "./car.svg";
 import styles from "./finish-speed-read.module.scss";
 
@@ -22,7 +22,6 @@ const FinishSpeedRead = () => (
         const wordsNumber = (
           speedreadText.description.match(/([а-яА-ЯёЁ]+)/g) || []
         ).length;
-        console.log("wordsNumber", wordsNumber);
 
         const [minutes, seconds] = speedreadTime.split(":").map(Number);
 

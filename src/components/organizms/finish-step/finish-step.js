@@ -1,7 +1,7 @@
 import React from "react";
 import StepsTemplate from "../../templates/steps-template";
 import Button from "../../atoms/button";
-import { StoreContext } from "../../../app";
+import { StoreContext } from "../../../index";
 import styles from "./finish-step.module.scss";
 
 const speedReadTable = {

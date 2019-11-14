@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import random from "random";
 import StepsTemplate from "../../templates/steps-template";
 import Button from "../../atoms/button";
-import { StoreContext } from "../../../app";
+import { StoreContext } from "../../../index";
 import TestDescription from "../../atoms/test-description";
 import { texts } from "../../../constants/speed-read-test";
 import styles from "./speed-read-test.module.scss";

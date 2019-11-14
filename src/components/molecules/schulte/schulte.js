@@ -126,11 +126,12 @@ class Schulte extends React.Component {
   onClickHandler = (symbol, key) => {
     const { answer, solution } = this.state;
     const { length: answerLength } = answer;
-    clearTimeout(this.state.error.timer);
     if (solution[answerLength] === symbol) {
       this.setState(({ answer }) => ({ answer: [...answer, symbol] }));
+      return null;
     }
 
+    clearTimeout(this.state.error.timer);
     this.setState(({ error }) => ({ error: { ...error, sym: key } }));
     const timer = setTimeout(() => {
       this.setState(({ error }) => ({ error: { ...error, sym: "" } }));
@@ -144,6 +145,10 @@ class Schulte extends React.Component {
 
   componentDidMount = () => {
     this.startTraining();
+  };
+  
+  componentWillUnmount = () => {
+    clearTimeout(this.state.error.timer);
   };
 
   componentDidUpdate = () => {
